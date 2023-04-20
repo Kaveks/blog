@@ -4,7 +4,9 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Create from './components/Create';
 import Home from './components/Home';
-
+import Register from './components/register';
+import Login from './components/login';
+import Logout from './components/logout';
 
 function App() {
   return (
@@ -18,6 +20,15 @@ function App() {
           </Route>
           <Route path="/create">
                 <Create></Create>
+          </Route>
+          <Route path="/register">
+                <Register></Register>
+          </Route>
+          <Route path="/login">
+                <Login></Login>
+          </Route>
+          <Route path ="/logout">
+                <Logout></Logout>
           </Route>
           </Switch>
         </div>
