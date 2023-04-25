@@ -1,10 +1,13 @@
+import Fetchposts from './Fetchposts';
+
+
+
 
 
 function Home() {
-    const heading="This is home page"
     return(
         <div className="home" style={{backgroundColor: '#FFFFFF'}}>
-            <h1>{heading}</h1>
+            <Fetchposts></Fetchposts>
         </div>
     )
 }
