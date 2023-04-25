@@ -1,14 +1,15 @@
 import axios from 'axios';
+import { Buffer } from 'buffer';
 // connect to axios
-const baseURL = 'http://127.0.0.1:8000/api/';
+
+const baseURL = `http://127.0.0.1:8000/api/`;
 // create the connection
 const axiosInstance = axios.create({
 	baseURL: baseURL,
 	timeout: 5000,
 	headers: {
-		Authorization: localStorage.getItem('access_token')
-			? 'JWT ' + localStorage.getItem('access_token')
-			: null,
+		Authorization: localStorage.getItem('access_token')? 
+		'JWT ' + localStorage.getItem('access_token'): null,
 		'Content-Type': 'application/json',
 		accept: 'application/json',
 	}, 
@@ -47,8 +48,7 @@ axiosInstance.interceptors.response.use(
 			const refreshToken = localStorage.getItem('refresh_token');
 
 			if (refreshToken) {
-				const tokenParts = JSON.parse(atob(refreshToken.split('.')[1]));
-
+				const tokenParts = JSON.parse(Buffer.from(refreshToken.split('.')[1],"base64"));
 				// exp date in token is expressed in seconds, while now() returns milliseconds:
 				const now = Math.ceil(Date.now() / 1000);
 				console.log(tokenParts.exp);

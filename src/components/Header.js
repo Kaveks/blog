@@ -7,7 +7,10 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import { NavLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
-import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button'; 
+import {useHistory} from 'react-router-dom';
+import { useState } from 'react'
+import SearchBar from "material-ui-search-bar";
 
 const useStyles = makeStyles((theme) => ({
 	appBar: {
@@ -24,6 +27,15 @@ const useStyles = makeStyles((theme) => ({
 
 function Header() {
 	const classes = useStyles();
+	let history = useHistory();
+	const [data, setData] = useState({ search: '' });
+	const goSearch = (e) => {
+		history.push({
+			pathname: '/search/',
+			search: '?search=' + data.search,
+		});
+		window.location.reload();
+	};
 	return (
 		<React.Fragment>
 			<CssBaseline />
@@ -49,7 +61,13 @@ function Header() {
 							Blog
 						</Link>
 					</Typography>
-                    <Typography
+                    
+					<SearchBar
+						value={data.search}
+						onChange={(newValue) => setData({ search: newValue })}
+						onRequestSearch={() => goSearch(data.search)}
+					/>
+					<Typography
 						variant="h6"
 						color="inherit"
 						noWrap
@@ -57,11 +75,11 @@ function Header() {
 					>
 						<Link
 							component={NavLink}
-							to="/create"
+							to="/admin"
 							underline="none"
 							color="textPrimary"
 						>
-							Create
+							Admin
 						</Link>
 					</Typography>
 					<nav>

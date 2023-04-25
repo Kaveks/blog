@@ -2,12 +2,16 @@ import { BrowserRouter as Router,Route,Switch } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Create from './components/Create';
-import Home from './components/Home';
-import Register from './components/register';
-import Login from './components/login';
-import Logout from './components/logout';
-
+import Home from './components/blog/Home';
+import Register from './components/auth/register';
+import Login from './components/auth/login';
+import Logout from './components/auth/logout';
+import Singleitem from './components/blog/singleitem';
+import Search from './components/blog/search';
+import Create from './components/Staff/create';
+import CreateEdit from './components/Staff/edit';
+import AdminFetch from './components/Staff/Adminfetch';
+import CreateDel from './components/Staff/delete';
 function App() {
   return (
     <Router>
@@ -18,9 +22,6 @@ function App() {
           <Route exact path="/">
                 <Home></Home>
           </Route>
-          <Route path="/create">
-                <Create></Create>
-          </Route>
           <Route path="/register">
                 <Register></Register>
           </Route>
@@ -30,6 +31,25 @@ function App() {
           <Route path ="/logout">
                 <Logout></Logout>
           </Route>
+          <Route path='/post/:id'>
+                <Singleitem></Singleitem>
+          </Route>
+          <Route path='/search/'>
+                <Search></Search>
+          </Route>
+          <Route exact path="/admin">
+               <AdminFetch></AdminFetch>
+          </Route>
+          <Route path="/admin/create">
+                <Create></Create>
+          </Route>
+          <Route path="/admin/edit/:id">
+                <CreateEdit></CreateEdit>
+          </Route>
+          <Route path="/admin/delete/:id">
+                <CreateDel></CreateDel>
+          </Route>
+        
           </Switch>
         </div>
         <Footer></Footer>

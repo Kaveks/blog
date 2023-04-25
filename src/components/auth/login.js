@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axiosInstance from '../axios';
+import axiosInstance from '../../axios';
 import { useHistory } from 'react-router-dom';
 //MaterialUI
 import Avatar from '@material-ui/core/Avatar';
@@ -54,7 +54,8 @@ export default function SignIn() {
 		e.preventDefault();
 		console.log(formData);
 // This time sending data to the rest_framework simpleJWT token_obtain url in the core urls
-		axiosInstance.post(`token/`, {
+		axiosInstance
+		.post(`token/`, {
 				email: formData.email,
 				password: formData.password,
 			})
@@ -64,8 +65,8 @@ export default function SignIn() {
 				axiosInstance.defaults.headers['Authorization'] =
 					'JWT ' + localStorage.getItem('access_token');
 				history.push('/');
-				//console.log(res);
-				//console.log(res.data);
+				console.log(response);
+				console.log(response.data);
 			});
 	};
 

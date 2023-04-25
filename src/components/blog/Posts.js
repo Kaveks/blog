@@ -7,6 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles((theme) => ({
     cardMedia: {
@@ -48,27 +49,39 @@ const Posts = (props) => {
                         return (
                             // Enterprise card is full width at sm breakpoint
                             <Grid item key={post.id} xs={12} md={4}>
-                                <Card className={classes.card}>
-                                    <CardMedia
-                                    className={classes.cardMedia}
-                                    image="https://source.unsplash.com/random"
-                                    title="Image title"
-                                    />
+                            <Card className={classes.card}>
+                                <Link
+										color="textPrimary"
+										href={'post/' + post.id}
+										className={classes.link}
+									>
+										<CardMedia
+											className={classes.cardMedia}
+											image="https://source.unsplash.com/random"
+											title="Image title"
+										/>
+									</Link>
                                     <CardContent className={classes.cardContent}>
-                                        <Typography
+                                        <Link
+                                            color="textPrimary"
+                                            href={'post/' + post.id}
+                                            className={classes.link}
+                                        >
+                                            <Typography
                                             gutterBottom
                                             variant="h6"
                                             component="h2"
                                             className={classes.postTitle}
                                             >
                                             {post.title.substr(0, 50)}...
-                                        </Typography>
+                                            </Typography>
+                                        </Link>
                                         <div className={classes.postText}>
                                             <Typography
                                             component="p"
                                             color="textPrimary"
                                             ></Typography>
-                                            <Typography variant="p" color="textSecondary">
+                                            <Typography variant="body1" color="textSecondary">
                                                 {post.excerpt.substr(0, 60)}...
                                             </Typography>
                                         </div>
