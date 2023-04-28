@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axiosInstance from '../../axios';
 import { useHistory } from 'react-router-dom';
 //MaterialUI
 import Avatar from '@material-ui/core/Avatar';
@@ -13,7 +12,10 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
+import axiosInstance from './auth_axios';
+import FbLogin from 'react-facebook-login';
+//custom
+import facebookLogin from './FacebookLogin';
 const useStyles = makeStyles((theme) => ({
 	paper: {
 		marginTop: theme.spacing(8),
@@ -55,21 +57,32 @@ export default function SignIn() {
 		console.log(formData);
 // This time sending data to the rest_framework simpleJWT token_obtain url in the core urls
 		axiosInstance
-		.post(`token/`, {
-				email: formData.email,
-				password: formData.password,
+		.post(`/auth/token/`, {
+			grant_type: 'password',
+			username: formData.email,
+			password: formData.password,
+			client_id: '6Ww4hkzXqXCmGE7YOwic4q12nCn2jFY0aw7O4L4n',
+			client_secret:
+			'Ks3lNoAQ4RSNueamef1EWCJ3vKkXwAqxaRkix4oOgJSh9ONxuJQYPgbbozOh1ctbOJj4fC5kiLDaRi8ytWQrsohSpibHbhwUsAF6MJGJBw9C5KbQbWV6TK78CXwMIvWN',
+	
 			})
 			.then((response) => {
-				localStorage.setItem('access_token', response.data.access);
-				localStorage.setItem('refresh_token', response.data.refresh);
-				axiosInstance.defaults.headers['Authorization'] =
-					'JWT ' + localStorage.getItem('access_token');
+				//store the tokens
+				localStorage.setItem('access_token', response.data.access_token);
+				localStorage.setItem('refresh_token', response.data.refresh_token);
+				// axiosInstance.defaults.headers['Authorization'] =
+				// 	'JWT ' + localStorage.getItem('access_token');
 				history.push('/');
+				window.location.reload();
 				console.log(response);
 				console.log(response.data);
 			});
+			
 	};
-
+	const responseFacebook = async (response) => {
+		facebookLogin(response.accessToken);
+	};
+	
 	const classes = useStyles();
 
 	return (
@@ -119,6 +132,11 @@ export default function SignIn() {
 					>
 						Sign In
 					</Button>
+					<FbLogin
+						appId="265229905854150"
+						fields="name,email,picture"
+						callback={responseFacebook}
+					/>
 					<Grid container>
 						<Grid item xs>
 							<Link href="#" variant="body2">
@@ -126,7 +144,7 @@ export default function SignIn() {
 							</Link>
 						</Grid>
 						<Grid item>
-							<Link href="#" variant="body2">
+							<Link href="/register" variant="body2">
 								{"Don't have an account? Sign Up"}
 							</Link>
 						</Grid>

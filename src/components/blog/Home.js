@@ -1,4 +1,4 @@
-import Fetchposts from './Fetchposts';
+import Displayposts from './Displayposts';
 
 
 
@@ -7,7 +7,7 @@ import Fetchposts from './Fetchposts';
 function Home() {
     return(
         <div className="home" style={{backgroundColor: '#FFFFFF'}}>
-            <Fetchposts></Fetchposts>
+            <Displayposts></Displayposts>
         </div>
     )
 }

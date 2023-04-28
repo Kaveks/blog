@@ -10,7 +10,7 @@ import Singleitem from './components/blog/singleitem';
 import Search from './components/blog/search';
 import Create from './components/Staff/create';
 import CreateEdit from './components/Staff/edit';
-import AdminFetch from './components/Staff/Adminfetch';
+import Admindisplay from './components/Staff/Admindisplay';
 import CreateDel from './components/Staff/delete';
 function App() {
   return (
@@ -34,11 +34,11 @@ function App() {
           <Route path='/post/:id'>
                 <Singleitem></Singleitem>
           </Route>
-          <Route path='/search/'>
+          <Route path='/search'>
                 <Search></Search>
           </Route>
           <Route exact path="/admin">
-               <AdminFetch></AdminFetch>
+               <Admindisplay></Admindisplay>
           </Route>
           <Route path="/admin/create">
                 <Create></Create>
@@ -49,7 +49,6 @@ function App() {
           <Route path="/admin/delete/:id">
                 <CreateDel></CreateDel>
           </Route>
-        
           </Switch>
         </div>
         <Footer></Footer>

@@ -9,6 +9,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
+//import { useParams } from 'react-router-dom';
+//MaterialUI
 // import { useLocation } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -40,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Search = () => {
 	const classes = useStyles();
+	//const { slug } = useParams();
 	const search = 'search';
 	const [searchState, setSearchState] = useState({
 		search: '',
@@ -65,16 +68,21 @@ const Search = () => {
 								<Card className={classes.card}>
 									<Link
 										color="textPrimary"
-										href={'/post/' + post.slug}
+										href={'/post/' + post.id}
 										className={classes.link}
 									>
 										<CardMedia
 											className={classes.cardMedia}
-											image="https://source.unsplash.com/random"
+											image={post.image}
 											title="Image title"
 										/>
 									</Link>
 									<CardContent className={classes.cardContent}>
+									<Link
+                                        color="textPrimary"
+										href={'/post/' + post.id}
+                                        className={classes.link}
+                                        >
 										<Typography
 											gutterBottom
 											variant="h6"
@@ -83,12 +91,10 @@ const Search = () => {
 										>
 											{post.title.substr(0, 50)}...
 										</Typography>
+									</Link>
 										<div className={classes.postText}>
                                         <Typography color="textSecondary">
 												{post.excerpt.substr(0, 40)}...
-											</Typography>
-                                            <Typography color="textSecondary">
-												{post.content}
 											</Typography>
 										</div>
 									</CardContent>

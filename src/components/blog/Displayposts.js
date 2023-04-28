@@ -5,7 +5,7 @@ import Posts from "./Posts"
 import axiosInstance from '../../axios';
 
 
-function Fetchposts() {
+function Displayposts() {
     const PostLoading =LoadpostComponent(Posts)
     const [fetchState,setFetchState] =useState({
         loading:true,
@@ -20,20 +20,11 @@ function Fetchposts() {
 			console.log(res.data);
 		});
 	}, [setFetchState])
-  /*   useEffect(()=>{
-          setFetchState({loading: true});
-        let url=`http://127.0.0.1:8000/api/`;
-        fetch(url)
-        .then((response)=> response.json())
-        .then((posts)=>{
-            setFetchState({loading:false, posts: posts})
-        });  
-    },[setFetchState]) */
     return  (
-        <div className="fetch-data">
+        <div className="display-data">
             <h2>Latest posts</h2>
             <PostLoading isLoading={fetchState.loading} posts={fetchState.posts}/>
         </div>
     );
 }
-export default Fetchposts;
+export default Displayposts;
