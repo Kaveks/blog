@@ -3,7 +3,7 @@ import Posts from './posts';
 import LoadpostComponent from '../blog/Loadpost';
 import axiosInstance from '../../axios';
 
-function AdminFetch() {
+function Admindisplay() {
 	const PostLoading = LoadpostComponent(Posts);
 	const [fetchState, setFetchState] = useState({
 		loading: true,
@@ -25,4 +25,4 @@ function AdminFetch() {
 		</div>
 	);
 }
-export default AdminFetch;
+export default Admindisplay;

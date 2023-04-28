@@ -40,8 +40,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const Posts = (props) => {
-	const { posts } = props;
+const Posts = (adminProps) => {
+	const { posts } = adminProps;
 	const classes = useStyles();
 	if (!posts || posts.length === 0) return <p>Can not find any posts, sorry</p>;
 	return (

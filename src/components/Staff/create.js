@@ -1,7 +1,6 @@
-/* eslint-disable eqeqeq */
+
 import React, { useState } from 'react';
-// import axiosInstance from '../../axios';
-import axios from 'axios';
+ import axiosInstance from '../../axios';
  import { useHistory } from 'react-router-dom';
 //MaterialUI
 import Avatar from '@material-ui/core/Avatar';
@@ -69,12 +68,13 @@ export default function Create() {
 	const [postImage, setPostImage] = useState(null);
 
 	const handleChange = (e) => {
+		// eslint-disable-next-line eqeqeq
 		if ([e.target.name] == 'image') {
 			setPostImage({
 				image: e.target.files,
 			});
-			console.log(e.target.files);
 		}
+		// eslint-disable-next-line eqeqeq
 		if ([e.target.name] =='title') {
 			updateFormData({
 				...postData,
@@ -95,33 +95,14 @@ export default function Create() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-	// 	let formData = new FormData();
-	// 	formData.append('title', postData.title);
-	// 	formData.append('slug', postData.slug);
-	// 	formData.append('author', 1);
-	// 	formData.append('excerpt', postData.excerpt);
-	// 	formData.append('content', postData.content);
-	// 	formData.append('image', postImage.image[0]);
-	// 	axiosInstance.post(`admin/create/`, formData);
-	
-	
-
-	const config = { headers: { 'Content-Type': 'multipart/form-data' } };
-	const URL = 'http://127.0.0.1:8000/api/admin/creat/';
-	let formData = new FormData();
-	formData.append('title', postData.title);
-	formData.append('slug', postData.slug);
-	formData.append('author', 1);
-	formData.append('excerpt', postData.excerpt);
-	formData.append('content', postData.content);
-	formData.append('image', postImage.image[0]);
-	
-	axios
-		.post(URL, formData, config)
-		.then((res) => {
-			console.log(res.data);
-		})
-		.catch((err) => console.log(err));
+		let formData = new FormData();
+		formData.append('title', postData.title);
+		formData.append('slug', postData.slug);
+		formData.append('author', 1);
+		formData.append('excerpt', postData.excerpt);
+		formData.append('content', postData.content);
+		formData.append('image', postImage.image[0]);
+		axiosInstance.post(`admin/create/`, formData);
 		history.push({
 			pathname: '/admin/',
 		});

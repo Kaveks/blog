@@ -39,7 +39,7 @@ const Posts = (props) => {
     const { posts } = props;
     const classes = useStyles();
     if (!posts || posts.length === 0) 
-        return <p>Can not find any posts, sorry</p>
+        return <p>Sorry, there are no posts at the moment!</p>
     
     return (
         <React.Fragment>
@@ -57,7 +57,7 @@ const Posts = (props) => {
 									>
 										<CardMedia
 											className={classes.cardMedia}
-											image="https://source.unsplash.com/random"
+											image={post.image}
 											title="Image title"
 										/>
 									</Link>
@@ -69,7 +69,7 @@ const Posts = (props) => {
                                         >
                                             <Typography
                                             gutterBottom
-                                            variant="h6"
+                                            variant="h2"
                                             component="h2"
                                             className={classes.postTitle}
                                             >
